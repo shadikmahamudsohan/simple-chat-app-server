@@ -7,6 +7,7 @@ const { default: mongoose, set } = require('mongoose');
 const Message = require('./model/Message');
 app.use(cors());
 const dotenv = require('dotenv').config();
+const port = process.env.PORT || 8080;
 
 
 const server = http.createServer(app);
@@ -78,7 +79,11 @@ io.on("connection", (socket) => {
     });
 });
 
+app.get('/', (req, res) => {
+    res.send("server is running");
+});
+
 // running the server at http://localhost:3001/
-server.listen(3001, () => {
-    console.log("server is running on 3001");
+server.listen(port, () => {
+    console.log(`server is listening at ${port}`);
 });
